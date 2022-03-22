@@ -10,11 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  get: ^4.6.1
-  font_awesome_flutter: ^9.2.0
-
+  firebase_core: ^1.11.0
   google_sign_in: ^5.2.1
   firebase_auth: ^3.3.5
+  flutter_facebook_auth: ^4.1.2
 
 dev_dependencies:
   flutter_test:

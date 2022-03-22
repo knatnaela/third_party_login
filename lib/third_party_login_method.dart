@@ -13,14 +13,21 @@ class ThirdPartyLoginMethods {
     //Firebase UserCredential
     UserCredential? userCredential;
 
-    //Initialize
-    ThirdPartyLoginWithGoogle thirdPartyLoginWithGoogle =
-        ThirdPartyLoginWithGoogle();
     //switch AuthType for dedicated sign-in method
     switch (authType) {
       //google sign-in method
       case AuthType.google:
+        //Initialize
+        ThirdPartyLoginWithGoogle thirdPartyLoginWithGoogle =
+            ThirdPartyLoginWithGoogle();
         userCredential = await thirdPartyLoginWithGoogle.signInWithGoogle();
+        break;
+      //google facebook sign-in method
+      case AuthType.facebook:
+        //Initialize
+        ThirdPartyLoginWithFacebook thirdPartyLoginWithFacebook =
+            ThirdPartyLoginWithFacebook();
+        userCredential = await thirdPartyLoginWithFacebook.signInWithFacebook();
         break;
       default:
     }
