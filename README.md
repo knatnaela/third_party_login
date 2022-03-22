@@ -4,7 +4,8 @@ Third Party Login is simple way to sign-in with different types of third party l
 
 ## Features
 
-Login With Google SignIn
+- Login With Google SignIn
+- Login With Facebook SignIn
 
 ## Getting started
 
@@ -37,3 +38,8 @@ import 'package:third_party_login/third_party_login.dart';
 final userCredential = await thirdPartyLoginMethods.socialMediaLogin(
         authType: AuthType.google);
 ```
+
+### AuthTypes
+
+- google
+- facebook
