@@ -17,7 +17,7 @@ First you need to follow Google sign-in package instructions see [Google Sign-In
 
 ```yaml
 dependencies:
-  third_party_login: ^1.0.0
+  third_party_login: ^1.0.1
 ```
 
 **2. Import package:**
