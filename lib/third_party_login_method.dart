@@ -9,7 +9,8 @@ class ThirdPartyLoginMethods {
   ///socialMediaLogin(AuthType.google)
   ///```
   ///
-  Future<UserCredential?> socialMediaLogin({required AuthType authType}) async {
+  Future<UserCredential?> socialMediaLogin(
+      {required AuthType authType, String? phoneNumber}) async {
     //Firebase UserCredential
     UserCredential? userCredential;
 

@@ -1,6 +1,8 @@
+import 'package:example/phone_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:third_party_login/third_party_login.dart';
+import 'package:third_party_login/thord_party_login_with_phone_number.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +38,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late ThirdPartyLoginMethods thirdPartyLoginMethods;
   late UserCredential? userCredential;
+  TextEditingController phone = TextEditingController();
+  TextEditingController sms = TextEditingController();
+  PhoneAuth phoneAuth = PhoneAuth();
+
   String photoUrl = "";
   String displayName = "";
   String uuid = "";
@@ -76,6 +82,38 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () => signInWithGoogle(),
               ),
             ),
+            TextField(
+              controller: phone,
+              keyboardType: TextInputType.phone,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              color: Colors.red,
+              child: TextButton(
+                child: const Text(
+                  'Verify Phone',
+                ),
+                onPressed: () => verifyPhone(),
+              ),
+            ),
+            TextField(
+              controller: sms,
+              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              color: Colors.black,
+              child: TextButton(
+                child: const Text(
+                  'Verify Code',
+                ),
+                onPressed: () => verifyCode(),
+              ),
+            ),
           ],
         ),
       ),
@@ -91,6 +129,16 @@ class _MyHomePageState extends State<MyHomePage> {
       photoUrl = credential?.user?.photoURL ?? "";
       displayName = credential?.user?.displayName ?? "";
     });
+    return null;
     // print(googleSignIn.onTap());
+  }
+
+  verifyPhone() async {
+    await phoneAuth.init(
+        phoneNumber: phone.text, resendToken: phoneAuth.resendToken);
+  }
+
+  verifyCode() {
+    phoneAuth.verifyCode(sms.text);
   }
 }

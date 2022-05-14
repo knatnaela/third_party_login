@@ -3,7 +3,7 @@ import '../third_party_login.dart';
 class Utils {
   static Utils? utils;
   //Initialize FirebaseAuth
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
   static Utils? getInstance() {
     utils ??= Utils();
     return utils;
@@ -14,7 +14,7 @@ class Utils {
       AuthCredential credential) async {
     try {
       //sign-in with provided credential to firebase
-      return await _auth.signInWithCredential(credential);
+      return await auth.signInWithCredential(credential);
 
       //firebase auth exception
     } on FirebaseAuthException catch (e) {
@@ -32,14 +32,14 @@ class Utils {
 
         //get sign-in methods from exception
         List<String> userSignInMethods =
-            await _auth.fetchSignInMethodsForEmail(email);
+            await auth.fetchSignInMethodsForEmail(email);
 
         //check in which sign-in method user signed in first
         if (userSignInMethods.first == "google.com" ||
             userSignInMethods.first == "facebook.com" ||
             userSignInMethods.first == "apple.com") {
           //sign with credential with found credential
-          var userCredential = await _auth.signInWithCredential(credential);
+          var userCredential = await auth.signInWithCredential(credential);
 
           //link pending credential with previous one
           return userCredential.user!.linkWithCredential(pendingCredential);
