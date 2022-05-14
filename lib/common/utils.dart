@@ -44,6 +44,8 @@ class Utils {
           //link pending credential with previous one
           return userCredential.user!.linkWithCredential(pendingCredential);
         }
+      } else {
+        rethrow;
       }
     }
     return null;

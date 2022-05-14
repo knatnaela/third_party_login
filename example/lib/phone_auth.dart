@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth_platform_interface/src/providers/phone_auth.dart';
 import 'package:firebase_auth_platform_interface/src/firebase_auth_exception.dart';
 import 'package:third_party_login/common/utils.dart';
@@ -31,9 +33,12 @@ class PhoneAuth extends ThirdPartyLoginWithPhoneNumber {
   }
 
   verifyCode(String smsCode) async {
-    print("start vode verification");
-    PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: verificationId!, smsCode: smsCode);
-    final Credential = await Utils().signInWithCredential(credential);
+    try {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: verificationId!, smsCode: smsCode);
+      final Credential = await Utils().signInWithCredential(credential);
+    } catch (e) {
+      inspect(e);
+    }
   }
 }

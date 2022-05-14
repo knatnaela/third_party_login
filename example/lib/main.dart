@@ -2,7 +2,6 @@ import 'package:example/phone_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:third_party_login/third_party_login.dart';
-import 'package:third_party_login/thord_party_login_with_phone_number.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
