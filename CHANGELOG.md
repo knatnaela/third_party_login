@@ -1,8 +1,12 @@
-## 1.0.0
+## 1.0.2
 
-- Initial Release
+- Added Phone Verification
 
 ## 1.0.1
 
 - Added firebase_core library
 - Added Facebook SignIn Method
+
+## 1.0.0
+
+- Initial Release
