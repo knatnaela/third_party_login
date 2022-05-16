@@ -9,8 +9,7 @@ class ThirdPartyLoginMethods {
   ///socialMediaLogin(AuthType.google)
   ///```
   ///
-  Future<UserCredential?> socialMediaLogin(
-      {required AuthType authType, String? phoneNumber}) async {
+  Future<UserCredential?> socialMediaLogin({required AuthType authType}) async {
     //Firebase UserCredential
     UserCredential? userCredential;
 
@@ -30,6 +29,7 @@ class ThirdPartyLoginMethods {
             ThirdPartyLoginWithFacebook();
         userCredential = await thirdPartyLoginWithFacebook.signInWithFacebook();
         break;
+
       default:
     }
     return userCredential;

@@ -1,7 +1,9 @@
-import 'package:example/phone_auth.dart';
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:third_party_login/third_party_login.dart';
+import 'package:third_party_login/third_party_login_with_phone_number.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,11 +41,10 @@ class _MyHomePageState extends State<MyHomePage> {
   late UserCredential? userCredential;
   TextEditingController phone = TextEditingController();
   TextEditingController sms = TextEditingController();
-  PhoneAuth phoneAuth = PhoneAuth();
-
   String photoUrl = "";
   String displayName = "";
   String uuid = "";
+  late ThirdPartyLoginWithPhoneNumber thirdPartyLoginWithPhoneNumber;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,11 +134,31 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   verifyPhone() async {
-    await phoneAuth.init(
-        phoneNumber: phone.text, resendToken: phoneAuth.resendToken);
+    thirdPartyLoginWithPhoneNumber = ThirdPartyLoginWithPhoneNumber();
+    try {
+      String? message =
+          await thirdPartyLoginWithPhoneNumber.init(phoneNumber: phone.text);
+      print(message);
+    } catch (e) {
+      inspect(e);
+    }
   }
 
-  verifyCode() {
-    phoneAuth.verifyCode(sms.text);
+  verifyCode() async {
+    try {
+      final UserCredential? userCredential =
+          await thirdPartyLoginWithPhoneNumber.verifyCode(smsCode: sms.text);
+      inspect(userCredential);
+    } catch (e) {
+      inspect(e);
+    }
+  }
+
+  resend() async {
+    try {
+      final String? message = await thirdPartyLoginWithPhoneNumber.resendSms();
+    } catch (e) {
+      inspect(e);
+    }
   }
 }

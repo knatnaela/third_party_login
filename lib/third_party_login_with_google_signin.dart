@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:third_party_login/common/utils.dart';
 
 ///ThirdPartyLoginWithGoogle
+
+@protected
 class ThirdPartyLoginWithGoogle {
   //Initialize GoogleSignIn
   final GoogleSignIn _googleSignIn = GoogleSignIn();

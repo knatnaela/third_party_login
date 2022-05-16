@@ -1,1 +1,1 @@
-enum AuthType { google, facebook, apple, phoneNumber }
+enum AuthType { google, facebook, phoneNumber }
