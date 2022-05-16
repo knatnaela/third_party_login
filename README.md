@@ -45,13 +45,7 @@ final userCredential = await thirdPartyLoginMethods.socialMediaLogin(
 
 - follow step number 1 and 2
 
-3. extend ThirdPartyLoginWithPhoneNumber class
-
-```dart
-class PhoneNumberAuth extends ThirdPartyLoginWithPhoneNumber{}
-```
-
-5. Initialize PhoneNumberAuth class and call init to start phone number verification. if it's successful it will return Code sent Success message
+3. Initialize PhoneNumberAuth class and call init to start phone number verification. if it's successful it will return Code sent Success message
 
 ```dart
 PhoneNumberAuth _auth = PhoneNumberAuth();
