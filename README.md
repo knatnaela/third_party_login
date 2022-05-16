@@ -19,7 +19,7 @@ Third Party Login is simple way to sign-in with different types of third party l
 
 ```yaml
 dependencies:
-  third_party_login: ^1.0.7
+  third_party_login: ^1.0.8
 ```
 
 **2. Import package:**
