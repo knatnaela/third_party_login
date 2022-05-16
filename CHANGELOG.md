@@ -1,6 +1,11 @@
+## 1.0.4
+
+- bug fix
+- update readme
+
 ## 1.0.3
 
-- Rethrow firebase exception for phone number verification
+- bug fix
 - update readme
 
 ## 1.0.2
