@@ -51,33 +51,17 @@ final userCredential = await thirdPartyLoginMethods.socialMediaLogin(
 class PhoneNumberAuth extends ThirdPartyLoginWithPhoneNumber{}
 ```
 
-5. Initialize PhoneNumberAuth class and call init to start phone number verification
+5. Initialize PhoneNumberAuth class and call init to start phone number verification. if it's successful it will return Code sent Success message
 
 ```dart
 PhoneNumberAuth _auth = PhoneNumberAuth();
-_auth.init(phoneNumber:contactNumber)
-```
-
-After calling init firebase will try to verify phone number you provided and if the verification complete `codeSent` will be called at that point you'll get sms code to the phone number you provided. after that you can call `verifyCode` and pass the sms code you just got.
-
-```dart
-class PhoneNumberAuth extends ThirdPartyLoginWithPhoneNumber{
-String? verificationId;
-String resendToken;
-
-@override
-codeSent(String verificationId, int? forceResendingToken) {
-  this.verificationId = verificationId;
-  resendToken = forceResendingToken;
-}
-....
-}
+final String? message = await _auth.init(phoneNumber:contactNumber)
 ```
 
 Next call `verifyCode` and pass the sms code value to verify the sms code you just got. this method will try to verify your code and if it's successful it will sign-in with the credential and return UserCredential.
-...
 
 ```dart
+...
 final UserCredential? userCredential =
           await thirdPartyLoginWithPhoneNumber.verifyCode(smsCode: sms);
 ```
@@ -86,7 +70,3 @@ final UserCredential? userCredential =
 
 - google
 - facebook
-
-```
-
-```
