@@ -13,6 +13,8 @@ Third Party Login is simple way to sign-in with different types of third party l
 
 - For Facebook sign-in setup instructions see [Facebook sign-in Git repo](https://github.com/darwin-morocho/flutter-facebook-auth)
 
+- For Phone Number verification setup instructions see [Firebase Phone Auth](https://firebase.google.com/docs/auth/flutter/phone-auth)
+
 ## Usage
 
 **1. Add the package to pubspec.yaml dependency:**
@@ -43,9 +45,9 @@ final userCredential = await thirdPartyLoginMethods.socialMediaLogin(
 
 ## Usage For Phone Number Verification
 
-- follow step number 1 and 2
+- follow step number `1` and `2`
 
-3. Initialize PhoneNumberAuth class and call init to start phone number verification. if it's successful it will return Code sent Success message
+**3. Initialize PhoneNumberAuth class and call init to start phone number verification. if it's successful it will return Code sent Success message**
 
 ```dart
 PhoneNumberAuth _auth = PhoneNumberAuth();
