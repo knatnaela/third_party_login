@@ -1,3 +1,8 @@
+## 1.0.8
+
+- bug fix
+- fix readme
+
 ## 1.0.7
 
 - bug fix
