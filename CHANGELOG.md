@@ -1,3 +1,16 @@
+## 1.0.7
+
+- bug fix
+
+## 1.0.6
+
+- bug fix
+- fix readme version
+
+## 1.0.5
+
+- update readme
+
 ## 1.0.4
 
 - bug fix
