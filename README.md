@@ -6,12 +6,16 @@ Third Party Login is simple way to sign-in with different types of third party l
 
 - Login With Google SignIn
 - Login With Facebook SignIn
+- Login With Apple SignIn
+- Login With PhoneNumber
 
 ## Getting started
 
 - For Google sign-in setup instructions see [Google Sign-In Git repo](https://github.com/flutter/plugins/tree/master/packages/google_sign_in/google_sign_in)
 
 - For Facebook sign-in setup instructions see [Facebook sign-in Git repo](https://github.com/darwin-morocho/flutter-facebook-auth)
+
+- For Apple sign-in setup instructions see [Apple sign-in doc](https://developer.apple.com/sign-in-with-apple/get-started)
 
 - For Phone Number verification setup instructions see [Firebase Phone Auth](https://firebase.google.com/docs/auth/flutter/phone-auth)
 
@@ -21,7 +25,7 @@ Third Party Login is simple way to sign-in with different types of third party l
 
 ```yaml
 dependencies:
-  third_party_login: ^1.0.8
+  third_party_login: ^1.0.9
 ```
 
 **2. Import package:**
@@ -66,3 +70,5 @@ final UserCredential? userCredential =
 
 - google
 - facebook
+- apple
+- phoneNumber
