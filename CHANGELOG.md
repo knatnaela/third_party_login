@@ -1,3 +1,7 @@
+## 1.0.9
+
+- Added Apple Sign in
+
 ## 1.0.8
 
 - bug fix
