@@ -79,7 +79,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text(
                   'SignIn With Google',
                 ),
-                onPressed: () => signInWithGoogle(),
+                onPressed: () => signIn(AuthType.google),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              color: Colors.blue,
+              child: TextButton(
+                child: const Text(
+                  'SignIn With Facebook',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => signIn(AuthType.facebook),
               ),
             ),
             TextField(
@@ -120,10 +133,10 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Future<UserCredential?> signInWithGoogle() async {
+  Future<UserCredential?> signIn(AuthType authType) async {
     thirdPartyLoginMethods = ThirdPartyLoginMethods();
-    final credential = await thirdPartyLoginMethods.socialMediaLogin(
-        authType: AuthType.google);
+    final credential =
+        await thirdPartyLoginMethods.socialMediaLogin(authType: authType);
     setState(() {
       userCredential = credential;
       photoUrl = credential?.user?.photoURL ?? "";
@@ -148,6 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       final UserCredential? userCredential =
           await thirdPartyLoginWithPhoneNumber.verifyCode(smsCode: sms.text);
+
       inspect(userCredential);
     } catch (e) {
       inspect(e);
