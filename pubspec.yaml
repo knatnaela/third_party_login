@@ -1,6 +1,6 @@
 name: third_party_login
 description: Third Party Login is simple way to sign-in with different types of third party login systems.
-version: 1.0.1
+version: 1.0.10
 homepage: https://github.com/knatnaela/third_party_login
 
 environment:
@@ -14,6 +14,8 @@ dependencies:
   google_sign_in: ^5.2.1
   firebase_auth: ^3.3.5
   flutter_facebook_auth: ^4.1.2
+  sign_in_with_apple: ^4.0.0
+  crypto: ^3.0.2
 
 dev_dependencies:
   flutter_test:

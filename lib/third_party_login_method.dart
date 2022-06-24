@@ -22,13 +22,21 @@ class ThirdPartyLoginMethods {
             ThirdPartyLoginWithGoogle();
         userCredential = await thirdPartyLoginWithGoogle.signInWithGoogle();
         break;
-      //google facebook sign-in method
+      //facebook sign-in method
       case AuthType.facebook:
         //Initialize
         ThirdPartyLoginWithFacebook thirdPartyLoginWithFacebook =
             ThirdPartyLoginWithFacebook();
         userCredential = await thirdPartyLoginWithFacebook.signInWithFacebook();
         break;
+      //apple sign-in method
+      case AuthType.apple:
+        //Initialize
+        ThirdPartyLoginWithApple thirdPartyLoginWithApple =
+            ThirdPartyLoginWithApple();
+        userCredential = await thirdPartyLoginWithApple.signInWithApple();
+        break;
+
       default:
     }
     return userCredential;

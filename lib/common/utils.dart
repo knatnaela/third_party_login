@@ -1,9 +1,11 @@
+import 'package:third_party_login/third_party_login_with_google_signin.dart';
+
 import '../third_party_login.dart';
 
 class Utils {
   static Utils? utils;
   //Initialize FirebaseAuth
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
   static Utils? getInstance() {
     utils ??= Utils();
     return utils;
@@ -14,7 +16,7 @@ class Utils {
       AuthCredential credential) async {
     try {
       //sign-in with provided credential to firebase
-      return await _auth.signInWithCredential(credential);
+      return await auth.signInWithCredential(credential);
 
       //firebase auth exception
     } on FirebaseAuthException catch (e) {
@@ -32,20 +34,39 @@ class Utils {
 
         //get sign-in methods from exception
         List<String> userSignInMethods =
-            await _auth.fetchSignInMethodsForEmail(email);
+            await auth.fetchSignInMethodsForEmail(email);
 
         //check in which sign-in method user signed in first
-        if (userSignInMethods.first == "google.com" ||
-            userSignInMethods.first == "facebook.com" ||
-            userSignInMethods.first == "apple.com") {
+        if (userSignInMethods.first == "google.com") {
           //sign with credential with found credential
-          var userCredential = await _auth.signInWithCredential(credential);
+          ThirdPartyLoginWithGoogle thirdPartyLoginWithGoogle =
+              ThirdPartyLoginWithGoogle();
+          var userCredential =
+              await thirdPartyLoginWithGoogle.signInWithGoogle();
 
           //link pending credential with previous one
-          return userCredential.user!.linkWithCredential(pendingCredential);
+          return await linkProviders(userCredential!, pendingCredential);
         }
+
+        if (userSignInMethods.first == "facebook.com") {
+          //sign with credential with found credential
+          ThirdPartyLoginWithGoogle thirdPartyLoginWithGoogle =
+              ThirdPartyLoginWithGoogle();
+          var userCredential =
+              await thirdPartyLoginWithGoogle.signInWithGoogle();
+
+          //link pending credential with previous one
+          return await linkProviders(userCredential!, pendingCredential);
+        }
+      } else {
+        rethrow;
       }
     }
     return null;
+  }
+
+  Future<UserCredential?> linkProviders(
+      UserCredential userCredential, AuthCredential newCredential) async {
+    return await userCredential.user!.linkWithCredential(newCredential);
   }
 }

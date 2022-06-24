@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:third_party_login/common/utils.dart';
 import 'package:third_party_login/third_party_login.dart';
 
 ///ThirdParty Login With Facebook class
+@protected
 class ThirdPartyLoginWithFacebook {
   //Initialize FacebookSignIn
   final FacebookAuth _facebookAuth = FacebookAuth.instance;

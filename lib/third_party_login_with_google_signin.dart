@@ -1,14 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:third_party_login/common/utils.dart';
 
 ///ThirdPartyLoginWithGoogle
+
+@protected
 class ThirdPartyLoginWithGoogle {
   //Initialize GoogleSignIn
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   ///SignInWith Google
-  Future<UserCredential?> signInWithGoogle() async {
+  Future<UserCredential?> signInWithGoogle([bool link = false]) async {
     try {
       //Initialize AuthCredential
       AuthCredential? credential;
@@ -35,6 +38,10 @@ class ThirdPartyLoginWithGoogle {
       //sign with a given AuthCredential
       UserCredential? userCredential =
           await Utils().signInWithCredential(credential);
+
+      if (link) {
+        await Utils().linkProviders(userCredential!, credential);
+      }
 
       //after signing with a given credential return FirebaseUserCredential
       return userCredential;

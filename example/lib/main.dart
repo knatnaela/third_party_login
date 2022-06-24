@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:third_party_login/third_party_login.dart';
+import 'package:third_party_login/third_party_login_with_phone_number.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,9 +39,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late ThirdPartyLoginMethods thirdPartyLoginMethods;
   late UserCredential? userCredential;
+  TextEditingController phone = TextEditingController();
+  TextEditingController sms = TextEditingController();
   String photoUrl = "";
   String displayName = "";
   String uuid = "";
+  late ThirdPartyLoginWithPhoneNumber thirdPartyLoginWithPhoneNumber;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +79,52 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text(
                   'SignIn With Google',
                 ),
-                onPressed: () => signInWithGoogle(),
+                onPressed: () => signIn(AuthType.google),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              color: Colors.blue,
+              child: TextButton(
+                child: const Text(
+                  'SignIn With Facebook',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => signIn(AuthType.facebook),
+              ),
+            ),
+            TextField(
+              controller: phone,
+              keyboardType: TextInputType.phone,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              color: Colors.red,
+              child: TextButton(
+                child: const Text(
+                  'Verify Phone',
+                ),
+                onPressed: () => verifyPhone(),
+              ),
+            ),
+            TextField(
+              controller: sms,
+              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              color: Colors.black,
+              child: TextButton(
+                child: const Text(
+                  'Verify Code',
+                ),
+                onPressed: () => verifyCode(),
               ),
             ),
           ],
@@ -82,15 +133,46 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Future<UserCredential?> signInWithGoogle() async {
+  Future<UserCredential?> signIn(AuthType authType) async {
     thirdPartyLoginMethods = ThirdPartyLoginMethods();
-    final credential = await thirdPartyLoginMethods.socialMediaLogin(
-        authType: AuthType.google);
+    final credential =
+        await thirdPartyLoginMethods.socialMediaLogin(authType: authType);
     setState(() {
       userCredential = credential;
       photoUrl = credential?.user?.photoURL ?? "";
       displayName = credential?.user?.displayName ?? "";
     });
+    return null;
     // print(googleSignIn.onTap());
+  }
+
+  verifyPhone() async {
+    thirdPartyLoginWithPhoneNumber = ThirdPartyLoginWithPhoneNumber();
+    try {
+      String? message =
+          await thirdPartyLoginWithPhoneNumber.init(phoneNumber: phone.text);
+      print(message);
+    } catch (e) {
+      inspect(e);
+    }
+  }
+
+  verifyCode() async {
+    try {
+      final UserCredential? userCredential =
+          await thirdPartyLoginWithPhoneNumber.verifyCode(smsCode: sms.text);
+
+      inspect(userCredential);
+    } catch (e) {
+      inspect(e);
+    }
+  }
+
+  resend() async {
+    try {
+      final String? message = await thirdPartyLoginWithPhoneNumber.resendSms();
+    } catch (e) {
+      inspect(e);
+    }
   }
 }
