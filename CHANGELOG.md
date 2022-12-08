@@ -1,3 +1,7 @@
+## 1.0.11
+
+- Upgrade Dependencies
+
 ## 1.0.10
 
 - Bug fix
