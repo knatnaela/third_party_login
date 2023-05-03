@@ -9,6 +9,10 @@ class ThirdPartyLoginMethods {
   ///socialMediaLogin(AuthType.google)
   ///```
   ///
+  //Initialize SignIn With Google
+  ThirdPartyLoginWithGoogle thirdPartyLoginWithGoogle =
+      ThirdPartyLoginWithGoogle();
+
   Future<UserCredential?> socialMediaLogin({required AuthType authType}) async {
     //Firebase UserCredential
     UserCredential? userCredential;
@@ -18,8 +22,7 @@ class ThirdPartyLoginMethods {
       //google sign-in method
       case AuthType.google:
         //Initialize
-        ThirdPartyLoginWithGoogle thirdPartyLoginWithGoogle =
-            ThirdPartyLoginWithGoogle();
+        thirdPartyLoginWithGoogle = ThirdPartyLoginWithGoogle();
         userCredential = await thirdPartyLoginWithGoogle.signInWithGoogle();
         break;
       //facebook sign-in method
@@ -40,5 +43,34 @@ class ThirdPartyLoginMethods {
       default:
     }
     return userCredential;
+  }
+
+  ///This method is used to sign-out from different third party login system
+  ///Pass AuthType enum
+  ///```dart
+  ///socialMediaLogin(AuthType.google)
+  ///```
+  ///
+  Future<void> signOut({required AuthType authType}) async {
+    //switch AuthType for dedicated sign-in method
+    switch (authType) {
+      //google sign-in method
+      case AuthType.google:
+        //signout from google
+        await thirdPartyLoginWithGoogle.signOut();
+        break;
+      //facebook sign-in method
+      case AuthType.facebook:
+        //Initialize
+
+        break;
+      //apple sign-in method
+      case AuthType.apple:
+        //Initialize
+
+        break;
+
+      default:
+    }
   }
 }

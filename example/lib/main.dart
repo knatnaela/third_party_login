@@ -45,6 +45,13 @@ class _MyHomePageState extends State<MyHomePage> {
   String displayName = "";
   String uuid = "";
   late ThirdPartyLoginWithPhoneNumber thirdPartyLoginWithPhoneNumber;
+
+  @override
+  void initState() {
+    thirdPartyLoginMethods = ThirdPartyLoginMethods();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,6 +87,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   'SignIn With Google',
                 ),
                 onPressed: () => signIn(AuthType.google),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              color: Colors.redAccent,
+              child: TextButton(
+                child: const Text(
+                  'SignOut from Google',
+                ),
+                onPressed: () => signOut(AuthType.google),
               ),
             ),
             SizedBox(
@@ -134,17 +153,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<UserCredential?> signIn(AuthType authType) async {
-    thirdPartyLoginMethods = ThirdPartyLoginMethods();
-    final credential =
+    userCredential =
         await thirdPartyLoginMethods.socialMediaLogin(authType: authType);
     setState(() {
-      userCredential = credential;
-      photoUrl = credential?.user?.photoURL ?? "";
-      displayName = credential?.user?.displayName ?? "";
+      userCredential = userCredential;
+      photoUrl = userCredential?.user?.photoURL ?? "";
+      displayName = userCredential?.user?.displayName ?? "";
     });
     return null;
     // print(googleSignIn.onTap());
   }
+
+  Future<void> signOutFromGoogle() async {}
 
   verifyPhone() async {
     thirdPartyLoginWithPhoneNumber = ThirdPartyLoginWithPhoneNumber();
@@ -159,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   verifyCode() async {
     try {
-      final UserCredential? userCredential =
+      userCredential =
           await thirdPartyLoginWithPhoneNumber.verifyCode(smsCode: sms.text);
 
       inspect(userCredential);
@@ -174,5 +194,9 @@ class _MyHomePageState extends State<MyHomePage> {
     } catch (e) {
       inspect(e);
     }
+  }
+
+  signOut(AuthType authType) async {
+    await thirdPartyLoginMethods.signOut(authType: authType);
   }
 }
