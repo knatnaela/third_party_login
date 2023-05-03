@@ -1,3 +1,7 @@
+## 1.0.12
+
+- Add Signout from google account
+
 ## 1.0.11
 
 - Upgrade Dependencies
