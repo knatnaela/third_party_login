@@ -15,11 +15,10 @@ class ThirdPartyLoginWithFacebook {
     switch (result.status) {
       case LoginStatus.success:
         //create AuthCredential from provided facebook account
-        final AuthCredential _authCredential =
+        final AuthCredential authCredential =
             FacebookAuthProvider.credential(result.accessToken!.token);
         //sign with a given AuthCredential
-        var userCredential =
-            await Utils().signInWithCredential(_authCredential);
+        var userCredential = await Utils().signInWithCredential(authCredential);
         return userCredential;
       case LoginStatus.cancelled:
         return null;
