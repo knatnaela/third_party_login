@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () => signOut(AuthType.google),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
@@ -171,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       String? message =
           await thirdPartyLoginWithPhoneNumber.init(phoneNumber: phone.text);
-      print(message);
+      debugPrint(message);
     } catch (e) {
       inspect(e);
     }
@@ -191,6 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
   resend() async {
     try {
       final String? message = await thirdPartyLoginWithPhoneNumber.resendSms();
+      debugPrint(message);
     } catch (e) {
       inspect(e);
     }
