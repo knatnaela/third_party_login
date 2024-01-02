@@ -1,6 +1,11 @@
 ## 1.0.13
 
 - Upgrade Dependencies
+- Bumps up Gradle version
+
+## 1.0.13
+
+- Upgrade Dependencies
 
 ## 1.0.12
 
