@@ -5,12 +5,13 @@ import 'package:third_party_login/common/utils.dart';
 class ThirdPartyLoginWithPhoneNumber {
   late String _verificationId;
   late int? _resendToken;
-  late String? _phoneNumber;
+  String? _phoneNumber;
   bool _autoResend = false;
 
   ///verify phone number
   Future<String?> _verifyPhoneNumber(
       {required String phoneNumber, int? timeOut, int? resendToken}) async {
+    _phoneNumber = phoneNumber;
     try {
       await Utils().auth.verifyPhoneNumber(
           phoneNumber: phoneNumber,
@@ -42,6 +43,7 @@ class ThirdPartyLoginWithPhoneNumber {
 
   ///on code auto retrieval timed out  this method is called by firebase auth
   _codeAutoRetrievalTimeout(String verificationId) {
+    if (_phoneNumber == null) return;
     _verificationId = verificationId;
     if (_autoResend) {
       _verifyPhoneNumber(phoneNumber: _phoneNumber!, resendToken: _resendToken);
@@ -83,10 +85,10 @@ class ThirdPartyLoginWithPhoneNumber {
   ///resendSms
   ///if you want to trigger resend sms manually call this method
   ///if code send successfully Code sent success message will be returned
-  Future<String?> resendSms() async {
+  Future<String?> resendSms({required String phoneNumber}) async {
     try {
       await _verifyPhoneNumber(
-          phoneNumber: _phoneNumber!, resendToken: _resendToken);
+          phoneNumber: phoneNumber, resendToken: _resendToken);
       return "Code Sent Success";
     } catch (e) {
       rethrow;
