@@ -1,3 +1,8 @@
+## 1.0.15
+
+- Bug fix on resend sms
+- now resend sms requires phoneNumber field
+
 ## 1.0.14
 
 - Upgrade Dependencies
