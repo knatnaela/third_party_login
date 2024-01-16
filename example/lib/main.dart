@@ -188,9 +188,10 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  resend() async {
+  resend(String phoneNumber) async {
     try {
-      final String? message = await thirdPartyLoginWithPhoneNumber.resendSms();
+      final String? message = await thirdPartyLoginWithPhoneNumber.resendSms(
+          phoneNumber: phoneNumber);
       debugPrint(message);
     } catch (e) {
       inspect(e);
